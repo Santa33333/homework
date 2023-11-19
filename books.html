@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图书选购</title>
+		<style type="text/css">
+			select {
+				width: 230px;
+				height: 200px;
+			}
+		</style>
+		<script type="text/javascript">
+			function doone() {
+				var bookList = document.getElementById("booklist");
+				var index = booklist.selectedIndex;
+
+				var userList = document.getElementById("userlist");
+				userList.add(booklist.options[index]);
+			};
+
+			function undoone() {
+				var userList = document.getElementById("userlist");
+				var index = userList.selectedIndex;
+
+				var bookList = document.getElementById("booklist");
+				bookList.add(userList.options[index]);
+			};
+
+			function clearnone() {
+				var userList = document.getElementById("userlist");
+				var bookList = document.getElementById("booklist");
+
+				while (userList.options.length > 0) {
+					bookList.add(userList.options[0])
+				}
+			};
+
+			function checkout() {
+				var userList = document.getElementById("userlist");
+				var money = 0;
+
+				for (let i = 0; i < userList.options.length; i++) {
+					money = money + parseFloat(userList.options[i].value)
+				}
+				alert("请您付款" + money + "元，欢迎下次光临！");
+			};
+		</script>
+	</head>
+	<body>
+		<form method="post" action="">
+			<table align="center">
+				<caption>选购图书</caption>
+				<tr align="center">
+					<td>图书备选区</td>
+					<td>图书采购区</td>
+				</tr>
+				<tr>
+					<td>
+						<select name="" id="booklist" size="10">
+							<option value="32" selected>计算机网络(32元)</option>
+							<option value="58">数据结构(58元)</option>
+							<option value="45">Java程序设计(45元)</option>
+							<option value="49">Web前端开发技术(49元)</option>
+							<option value="35">Web前端开发技术实验与实践(35元)</option>
+							<option value="30">计算机组成原理(30元)</option>
+							<option value="30">数据库开发技术(30元)</option>
+						</select>
+					</td>
+					<td align="center">
+						<select name="" id="userlist" size="10"></select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="button" value="单一选购" onclick="doone();">
+						<input type="button" value="单一退购" onclick="undoone();">
+						<input type="button" value="清空" onclick="clearnone();">
+						<input type="button" value="结帐" onclick="checkout();">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
